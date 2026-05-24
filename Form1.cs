@@ -1,4 +1,5 @@
-﻿using System;
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,101 +19,69 @@ namespace WindowsFormsApp3WithTicToeGameProgect
         }
 
         string currentplayer = "X";
-        
 
-        void DisableAll()
+        void Disable()
         {
-            btn1.Enabled = false;
-            btn2.Enabled = false;
-            btn3.Enabled = false;
-            btn4.Enabled = false;
-            btn5.Enabled = false;
-            btn6.Enabled = false;
-            btn7.Enabled = false;
-            btn8.Enabled = false;
-            btn9.Enabled = false;
+            Button[] allbuttun = { btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9 };
+            foreach (var buttun in allbuttun)
+            {
+                buttun.Enabled = false;
+            }
+        }
+        void ColorPaint(Button a, Button b, Button c)
+        {
+            a.BackColor = Color.Green;
+            b.BackColor = Color.Green;
+            c.BackColor = Color.Green;
+        }
+        void AnyWinner(Button a, Button b, Button c)
+        {
+            lbwin.Text = "Player " + a.Text + " Wins!";
+            lbGameover.Text = "GAME OVER";
+            ColorPaint(a, b, c);
+            Disable();
         }
         bool ChecckedWinner()
         {
             if(btn1.Text == btn2.Text && btn2.Text == btn3.Text && btn1.Text != "?")
             {
-                lbwin.Text = "Player " + btn1.Text + " Wins";
-                lbGameover.Text = "GAME OVER";
-                btn1.BackColor = Color.Green;
-                btn2.BackColor = Color.Green;
-                btn3.BackColor = Color.Green;
-                DisableAll();
+                AnyWinner(btn1, btn2, btn3);
                 return true;
             }
             if (btn4.Text == btn5.Text && btn5.Text == btn6.Text && btn4.Text != "?")
             {
-                lbwin.Text = "Player " + btn4.Text + " Wins";
-                lbGameover.Text = "GAME OVER";
-                btn4.BackColor = Color.Green;
-                btn5.BackColor = Color.Green;
-                btn6.BackColor = Color.Green;
-                DisableAll();
+                AnyWinner(btn4, btn5, btn6);
                 return true;
             }
             if (btn7.Text == btn8.Text && btn8.Text == btn9.Text && btn7.Text != "?")
             {
-                lbwin.Text = "Player " + btn7.Text + " Wins";
-                lbGameover.Text = "GAME OVER";
-                btn7.BackColor = Color.Green;
-                btn8.BackColor = Color.Green;
-                btn9.BackColor = Color.Green;
-                DisableAll();
+                AnyWinner(btn7, btn8, btn9);
                 return true;
             }
             if (btn1.Text == btn4.Text && btn4.Text == btn7.Text && btn1.Text != "?")
             {
-                lbwin.Text = "Player " + btn1.Text + " Wins";
-                lbGameover.Text = "GAME OVER";
-                btn1.BackColor = Color.Green;
-                btn4.BackColor = Color.Green;
-                btn7.BackColor = Color.Green;
-                DisableAll();
+                AnyWinner(btn1, btn4, btn7);
                 return true;
             }
             if (btn2.Text == btn5.Text && btn5.Text == btn8.Text && btn2.Text != "?")
             {
-                
-                lbwin.Text = "Player " + btn2.Text + " Wins";
-                lbGameover.Text = "GAME OVER";
-                btn2.BackColor = Color.Green;
-                btn5.BackColor = Color.Green;
-                btn8.BackColor = Color.Green;
-                DisableAll();
+
+                AnyWinner(btn2, btn5, btn8);
                 return true;
             }
             if (btn3.Text == btn6.Text && btn6.Text == btn9.Text && btn3.Text != "?")
             {
-                lbwin.Text = "Player " + btn3.Text + " Wins";
-                lbGameover.Text = "GAME OVER";
-                btn3.BackColor = Color.Green;
-                btn6.BackColor = Color.Green;
-                btn9.BackColor = Color.Green;
-                DisableAll();
+                AnyWinner(btn3, btn6, btn9);
                 return true;
             }
             if (btn1.Text == btn5.Text && btn5.Text == btn9.Text && btn1.Text != "?")
             {
-                lbwin.Text = "Player " + btn1.Text + " Wins";
-                lbGameover.Text = "GAME OVER";
-                btn1.BackColor = Color.Green;
-                btn5.BackColor = Color.Green;
-                btn9.BackColor = Color.Green;
-                DisableAll();
+                AnyWinner(btn1, btn5, btn9);
                 return true;
             }
             if (btn3.Text == btn5.Text && btn5.Text == btn7.Text && btn3.Text != "?")
             {
-                lbwin.Text = "Player " + btn3.Text + " Wins";
-                lbGameover.Text = "GAME OVER";
-                btn3.BackColor = Color.Green;
-                btn5.BackColor = Color.Green;
-                btn7.BackColor = Color.Green;
-                DisableAll();
+                AnyWinner(btn3, btn5, btn7);
                 return true;
             }
             if(btn1.Text != "?" && btn2.Text != "?" && btn3.Text != "?" && btn4.Text != "?"
@@ -120,67 +89,41 @@ namespace WindowsFormsApp3WithTicToeGameProgect
             {
                 lbwin.Text = "DRAW";
                 lbGameover.Text = "GAME OVER";
-                DisableAll();
+                Disable();
                 return true;
-
             }
-           
             return false;
         }
-
         void RestartGame()
         {
-            btn1.Text = "?"; 
-            btn2.Text = "?"; 
-            btn3.Text = "?"; 
-            btn4.Text = "?"; 
-            btn5.Text = "?"; 
-            btn6.Text = "?"; 
-            btn7.Text = "?"; 
-            btn8.Text = "?";
-            btn9.Text = "?";
-            
+            Button[] allbuttuns = { btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9 };
+            foreach(var V in allbuttuns)
+            {
+                V.Text = "?";
+                V.BackColor = Color.White;
+                V.Enabled = true;
+            }
             currentplayer = "X";
             lbwin.Text = "RESULT";
-
-            btn1.BackColor = Color.White;
-            btn2.BackColor = Color.White;
-            btn3.BackColor = Color.White;
-            btn4.BackColor = Color.White;
-            btn5.BackColor = Color.White;
-            btn6.BackColor = Color.White;
-            btn7.BackColor = Color.White;
-            btn8.BackColor = Color.White;
-            btn9.BackColor = Color.White;
-
-            btn1.Enabled = true;
-            btn2.Enabled = true;
-            btn3.Enabled = true;
-            btn4.Enabled = true;
-            btn5.Enabled = true;
-            btn6.Enabled = true;
-            btn7.Enabled = true;
-            btn8.Enabled = true;
-            btn9.Enabled = true;
         }
 
-        /* Game With Computer
-        void ComputerPlayRandom()
-        {
-            Button[] btns = { btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9 };
+        // Game With Computer
+        //void ComputerPlayRandom()
+        //{
+        //    Button[] btns = { btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9 };
 
-            Random rnd = new Random();
-            int index;
-            do
-            {
-                index = rnd.Next(0, 9);
-            } while (btns[index].Text != "?");
+        //    Random rnd = new Random();
+        //    int index;
+        //    do
+        //    {
+        //        index = rnd.Next(0, 9);
+        //    } while (btns[index].Text != "?");
 
-            btns[index].Text = "O";
+        //    btns[index].Text = "O";
 
-        }
-        */
-      private void Buttun_Click(object sender, EventArgs e)
+        //}
+
+        private void Buttun_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
 
@@ -191,8 +134,7 @@ namespace WindowsFormsApp3WithTicToeGameProgect
             }
            
              btn.Text = currentplayer;
-            
-            
+
             if(ChecckedWinner())
             {
                 return;
@@ -205,26 +147,32 @@ namespace WindowsFormsApp3WithTicToeGameProgect
             {
                 currentplayer = "X";
             }
-
-       
-            /*
-            if(ChecckedWinner())
-            {
-                return;
-            }
-            ComputerPlayRandom();
-            if (ChecckedWinner())
-            {
-                return;
-            }
-            */
+            //if(ChecckedWinner())
+            //{
+            //    return;
+            //}
+            //ComputerPlayRandom();
+            //if (ChecckedWinner())
+            //{
+            //    return;
+            //}
+            
         }
         private void button1_Click(object sender, EventArgs e)
         {
             RestartGame();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+        
     }
 }
+
+
+
 
 
 
